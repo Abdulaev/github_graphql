@@ -1,1 +1,1 @@
-github_graphql
+Example of usage GitHub graphql api
