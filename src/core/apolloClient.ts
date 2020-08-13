@@ -1,7 +1,5 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client'
 
-console.log(process.env)
-
 const createClient = (uri: string) => {
   return new ApolloClient({
     uri,
