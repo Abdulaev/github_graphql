@@ -15,14 +15,18 @@ export const RepositoriesList: React.FC<RepositoriesListProps> = ({ loading, rep
   return (
     <Loader loading={loading}>
       <Container>
-        {repositories?.edges.map(({ node }) => (
-          <CardContainer key={node.id}>
-            <Card header={<Title>{node.name}</Title>}>
-              <Text>{`Stargazer count: ${node.stargazers.totalCount}`}</Text>
-              <Anchor href={node.url}>{node.url}</Anchor>
-            </Card>
-          </CardContainer>
-        ))}
+        {repositories?.edges.length > 0 ? (
+          repositories?.edges.map(({ node }) => (
+            <CardContainer key={node.id}>
+              <Card header={<Title>{node.name}</Title>}>
+                <Text>{`Stargazer count: ${node.stargazers.totalCount}`}</Text>
+                <Anchor href={node.url}>{node.url}</Anchor>
+              </Card>
+            </CardContainer>
+          ))
+        ) : (
+          <Text>There is no repositories!</Text>
+        )}
       </Container>
     </Loader>
   )
