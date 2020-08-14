@@ -5,7 +5,7 @@ import {
   getLicenseQuery,
   getRepositoryNameQuery,
   getLanguageQuery,
-  getOrderByQuery,
+  getSortQuery,
   getCreatedTimeQuery
 } from 'common/helpers'
 import { EdgeType, Repository } from '@types'
@@ -22,7 +22,8 @@ export const useRepositoriesList = (
   chosenLanguage: string,
   licenseType: string,
   createdTime: string,
-  repoName: string
+  repoName: string,
+  sort: string
 ) => {
   const queryVar = useMemo(
     () =>
@@ -31,7 +32,7 @@ export const useRepositoriesList = (
         getRepositoryNameQuery(repoName),
         getLanguageQuery(chosenLanguage),
         getCreatedTimeQuery(createdTime),
-        getOrderByQuery()
+        getSortQuery(sort)
       ].join(' '),
     [chosenLanguage, licenseType, createdTime, repoName]
   )

@@ -10,6 +10,7 @@ const Repositories: React.FC = () => {
   const [licenseType, setLicenseType] = useState(ALL)
   const [repoNameQuery, setRepoNameQuery] = useState('')
   const [chosenLanguage] = useState('Javascript')
+  const [sort] = useState('stars')
 
   const handleSelectLicenseType = (value: string) => {
     setLicenseType(value)
@@ -24,7 +25,13 @@ const Repositories: React.FC = () => {
 
   const lastMonthDate = useMemo(() => dayjs().subtract(1, 'M').format('YYYY-MM-DD'), [])
 
-  const repositories = useRepositoriesList(chosenLanguage, licenseType, lastMonthDate, repoName)
+  const repositories = useRepositoriesList(
+    chosenLanguage,
+    licenseType,
+    lastMonthDate,
+    repoName,
+    sort
+  )
 
   return (
     <>

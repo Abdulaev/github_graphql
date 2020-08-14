@@ -11,4 +11,4 @@ export const getRepositoryNameQuery = (repositoryName: string) =>
 export const getCreatedTimeQuery = (createdTime: string) =>
   createdTime ? `created:>${createdTime}` : ''
 
-export const getOrderByQuery = () => 'sort:stars'
+export const getSortQuery = (sort: string) => (sort ? `sort:${sort}` : '')
