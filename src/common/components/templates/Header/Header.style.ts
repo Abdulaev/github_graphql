@@ -17,6 +17,6 @@ export const Title = styled.h3`
 `
 
 export const Content = styled.div`
-  max-width: ${p => p.theme.breakPoints.lg}px;
+  max-width: ${p => p.theme.breakPoints.xl}px;
   width: 100%;
 `

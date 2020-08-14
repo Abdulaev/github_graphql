@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react'
 import dayjs from 'dayjs'
+import { useDebounce } from 'use-debounce'
 import { ALL } from 'core/constants'
 import { useRepositoriesList } from './services/useRepositoriesList'
 import { FilterBar } from './components/FilterBar/FilterBar'
@@ -10,15 +11,6 @@ const Repositories: React.FC = () => {
   const [repoNameQuery, setRepoNameQuery] = useState('')
   const [chosenLanguage] = useState('Javascript')
 
-  const lastMonthDate = useMemo(() => dayjs().subtract(1, 'M').format('YYYY-MM-DD'), [])
-
-  const repositories = useRepositoriesList(
-    chosenLanguage,
-    licenseType,
-    lastMonthDate,
-    repoNameQuery
-  )
-
   const handleSelectLicenseType = (value: string) => {
     setLicenseType(value)
   }
@@ -27,6 +19,12 @@ const Repositories: React.FC = () => {
     if (value.length === 0) setRepoNameQuery('')
     else setRepoNameQuery(value)
   }
+
+  const [repoName] = useDebounce(repoNameQuery, 400)
+
+  const lastMonthDate = useMemo(() => dayjs().subtract(1, 'M').format('YYYY-MM-DD'), [])
+
+  const repositories = useRepositoriesList(chosenLanguage, licenseType, lastMonthDate, repoName)
 
   return (
     <>

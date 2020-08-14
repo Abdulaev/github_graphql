@@ -2,12 +2,10 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   display: flex;
+  flex-direction: column;
+  max-width: 360px;
 
   > select {
-    margin-right: 24px;
-  }
-
-  > input {
-    max-width: 360px;
+    margin-bottom: 16px;
   }
 `

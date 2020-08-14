@@ -9,6 +9,9 @@ export const GET_REPOSITORIES = gql`
             id
             name
             url
+            licenseInfo {
+              name
+            }
             stargazers(first: 10) {
               totalCount
             }

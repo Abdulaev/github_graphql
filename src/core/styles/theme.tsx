@@ -20,7 +20,9 @@ export const theme = {
     thin: 14
   },
   breakPoints: {
-    lg: 1200
+    xl: 1200,
+    lg: 940,
+    md: 640
   }
 }
 
