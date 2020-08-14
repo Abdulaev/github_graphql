@@ -1,10 +1,21 @@
+import { useMemo } from 'react'
 import { useQuery } from '@apollo/client'
 import { GET_REPOSITORIES } from 'core/queries/search/getRepositories'
-import { ALL } from 'core/constants'
+import {
+  getLicenseQuery,
+  getRepositoryNameQuery,
+  getLanguageQuery,
+  getOrderByQuery,
+  getCreatedTimeQuery
+} from 'common/helpers'
 import { EdgeType, Repository } from '@types'
 
 interface RepositoriesLoadData {
   search: EdgeType<Repository>
+}
+
+interface RepositoriesQueryVars {
+  query: string
 }
 
 export const useRepositoriesList = (
@@ -13,15 +24,26 @@ export const useRepositoriesList = (
   createdTime: string,
   repoName: string
 ) => {
-  const { data, loading, error } = useQuery<RepositoriesLoadData>(GET_REPOSITORIES, {
-    variables: {
-      query: `${createdTime ? `created:>${createdTime}` : ''} ${
-        chosenLanguage ? `language:${chosenLanguage}` : ''
-      } ${licenseType !== ALL ? `license:${licenseType}` : ''} ${
-        repoName ? `${repoName} in:name` : ''
-      } sort:stars`
+  const queryVar = useMemo(
+    () =>
+      [
+        getLicenseQuery(licenseType),
+        getRepositoryNameQuery(repoName),
+        getLanguageQuery(chosenLanguage),
+        getCreatedTimeQuery(createdTime),
+        getOrderByQuery()
+      ].join(' '),
+    [chosenLanguage, licenseType, createdTime, repoName]
+  )
+
+  const { data, loading, error } = useQuery<RepositoriesLoadData, RepositoriesQueryVars>(
+    GET_REPOSITORIES,
+    {
+      variables: {
+        query: queryVar
+      }
     }
-  })
+  )
 
   return { data, loading, error }
 }

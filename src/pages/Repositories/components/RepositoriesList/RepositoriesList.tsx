@@ -13,21 +13,17 @@ interface RepositoriesListProps {
 
 export const RepositoriesList: React.FC<RepositoriesListProps> = ({ loading, repositories }) => {
   return (
-    <>
-      {loading ? (
-        <Loader />
-      ) : (
-        <Container>
-          {repositories.edges.map(({ node }) => (
-            <CardContainer key={node.id}>
-              <Card header={<Title>{node.name}</Title>}>
-                <Text>{`Stargazer count: ${node.stargazers.totalCount}`}</Text>
-                <Anchor href={node.url}>{node.url}</Anchor>
-              </Card>
-            </CardContainer>
-          ))}
-        </Container>
-      )}
-    </>
+    <Loader loading={loading}>
+      <Container>
+        {repositories?.edges.map(({ node }) => (
+          <CardContainer key={node.id}>
+            <Card header={<Title>{node.name}</Title>}>
+              <Text>{`Stargazer count: ${node.stargazers.totalCount}`}</Text>
+              <Anchor href={node.url}>{node.url}</Anchor>
+            </Card>
+          </CardContainer>
+        ))}
+      </Container>
+    </Loader>
   )
 }

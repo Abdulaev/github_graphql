@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 import { useQuery } from '@apollo/client'
-import { Input, Select } from 'common/components/atoms'
+import { Input, Loader, Select } from 'common/components/atoms'
 import { GET_ALL_LICENSES } from 'core/queries/licenses/getAllLicenses'
 import { License } from '@types'
 import { Container } from './FilterBar.style'
@@ -33,12 +33,12 @@ export const FilterBar: React.FC<FilterBarProps> = ({ onSelectLicenseType, onSea
     [data]
   )
 
-  if (loading) return <p>Loading license types...</p>
-
   return (
-    <Container>
-      <Select options={options} onSelect={onSelectLicenseType} />
-      <Input onChange={onSearchRepoName} placeholder='Search by repository name' />
-    </Container>
+    <Loader loading={loading}>
+      <Container>
+        <Select options={options} onSelect={onSelectLicenseType} />
+        <Input onChange={onSearchRepoName} placeholder='Search by repository name' />
+      </Container>
+    </Loader>
   )
 }

@@ -1,15 +1,11 @@
 import React from 'react'
-import SpinnerIcon from 'assets/images/spinner.png'
-import { Container, StyledImage } from './Loader.style'
+import { Spinner } from 'common/components/atoms'
 
 interface LoaderProps {
   small?: boolean
+  loading: boolean
 }
 
-export const Loader: React.FC<LoaderProps> = ({ small = false }) => {
-  return (
-    <Container small={small}>
-      <StyledImage src={SpinnerIcon} alt='' />
-    </Container>
-  )
+export const Loader: React.FC<LoaderProps> = ({ small = false, loading, children }) => {
+  return <>{loading ? <Spinner small={small} /> : children}</>
 }

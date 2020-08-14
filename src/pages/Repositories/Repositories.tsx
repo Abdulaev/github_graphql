@@ -24,11 +24,8 @@ const Repositories: React.FC = () => {
   }
 
   const handleSearchRepoName = (value: string) => {
-    if (value.length === 0) {
-      setRepoNameQuery('')
-    } else {
-      setRepoNameQuery(value)
-    }
+    if (value.length === 0) setRepoNameQuery('')
+    else setRepoNameQuery(value)
   }
 
   return (
