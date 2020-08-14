@@ -34,7 +34,7 @@ export const useRepositoriesList = (
         getCreatedTimeQuery(createdTime),
         getSortQuery(sort)
       ].join(' '),
-    [chosenLanguage, licenseType, createdTime, repoName]
+    [chosenLanguage, licenseType, createdTime, repoName, sort]
   )
 
   const { data, loading, error } = useQuery<RepositoriesLoadData, RepositoriesQueryVars>(
