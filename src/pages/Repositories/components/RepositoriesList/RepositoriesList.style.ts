@@ -11,6 +11,10 @@ export const Container = styled.div`
   grid-auto-rows: 1fr;
   gap: 20px 10px;
 
+  @media (max-width: ${p => p.theme.breakPoints.sm}px) {
+    grid-template-columns: 1fr;
+  }
+
   @media (min-width: ${p => p.theme.breakPoints.md}px) {
     grid-template-columns: 1fr 1fr 1fr;
   }
